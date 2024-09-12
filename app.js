@@ -24,7 +24,7 @@ app.post('/submit', async(req,res)=>{
     const id = req.body.id
     
     const api  = await axios.get(
-        `https://api.imgflip.com/caption_image?username=SunnyKoushik&password=12345678&template_id=${id}&text0=${text0}&text1=${text1}`
+        `https://api.imgflip.com/caption_image?username=YOURAPI&password=PASSWORD&template_id=${id}&text0=${text0}&text1=${text1}`
     )
     
     const image = api.data.data.url;
