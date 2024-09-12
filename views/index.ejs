@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Matemasie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <form action="/submit" method="post">
+        <input type="text" name="text0" placeholder="Enter your top caption">
+        <input type="text" name="text1" placeholder="Enter your bottom caption">
+        <input type="text" name="id" id="username" value="<%=selectedid%>">
+        <button type="submit">Submit</button>
+    </form>
+    <div class="output">
+        <% if (locals.image){ %>
+            <img src="<%= image%>">
+        <% } %>
+    </div>
+    <h1> SELECT YOUR TEMPLATE </h1>
+    <div class="images">
+    <% if (locals.data && data.memes) { %>
+        <% data.memes.forEach(meme => { %>
+            <% if(meme.box_count <=2) {%>
+                <img src="<%= meme.url %>" id="<%= meme.id %>" alt="<%= meme.name %>" onclick="setUsername('<%= meme.id %>')">
+        <% }}); %>
+    <% } %>
+    </div>
+    <script>
+        let prev = null;
+        function setUsername(value) {
+            if(prev == value) {
+                document.getElementById(prev).classList.remove("active");
+                document.getElementById('username').value = "";
+                return;
+            }
+            document.getElementById('username').value = value;
+            document.getElementById(value).classList.add("active");
+            if(prev != null){
+                document.getElementById(prev).classList.remove("active");
+            }
+            prev = value;
+        }
+    </script>
+</body>
+</html>
